@@ -10,12 +10,9 @@ function ErrorToastContent() {
   useEffect(() => {
     const error = searchParams.get("error");
 
-    if (error === "no_payment_access") toast.error("Verify your profile!");
-    if (error === "not_verified") toast.error("Verify your profile!");
-    if (error === "not_authenticated") toast.error("You must be logged in!");
+    if (error === "not_authenticated") toast.error("You must be logged in.");
     if (error === "already_authenticated")
-      toast.error("You are already logged in!");
-    if (error === "wrong_file") toast.error("Wrong file");
+      toast.error("You are already logged in.");
   }, [searchParams]);
 
   return null;
@@ -27,7 +24,15 @@ export default function GlobalErrorToasts() {
       <Suspense fallback={null}>
         <ErrorToastContent />
       </Suspense>
-      <Toaster position="top-right" closeButton />
+      <Toaster
+        position="bottom-right"
+        closeButton
+        toastOptions={{
+          unstyled: true,
+          className:
+            "border border-foreground shadow-right-bottom rounded-full flex items-center justify-center gap-x-2",
+        }}
+      />
     </>
   );
 }

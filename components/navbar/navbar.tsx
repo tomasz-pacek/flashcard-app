@@ -1,6 +1,7 @@
 import Image from "next/image";
 import LoginDropdown from "./login-dropdown";
 import Link from "next/link";
+import NavbarNavigation from "./navbar-navigation";
 
 export default function Navbar() {
   return (
@@ -13,10 +14,10 @@ export default function Navbar() {
           height={40}
           alt="small flashcard logo"
         />
-        <p className="font-semibold text-2xl">Flashcard</p>
+        <p className="font-semibold text-2xl max-sm:hidden">Flashcard</p>
       </Link>
       {/* NAVIGATION */}
-      <div className="absolute -translate-x-1/2 left-1/2">czesc</div>
+      <NavbarNavigation />
       {/* LOGIN */}
       <LoginDropdown />
     </div>

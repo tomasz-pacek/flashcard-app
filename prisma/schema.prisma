@@ -23,6 +23,8 @@ model User {
   updatedAt     DateTime  @updatedAt
   sessions      Session[]
   accounts      Account[]
+  flashcards Flashcard[]
+  category Category[]
 
   @@unique([email])
   @@map("user")
@@ -74,4 +76,22 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model Flashcard {
+  id String @id @default(cuid())
+  userId String 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question String 
+  answer String
+  categoryId String
+  category Category @relation(fields: [categoryId], references: [id])
+}
+
+model Category {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  category String @unique
+  flashcard Flashcard[]
 }

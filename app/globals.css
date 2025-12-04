@@ -56,7 +56,7 @@
   --secondary: oklch(0.568 0.1371 265.8);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted-foreground: oklch(0.4849 0.032 59.8);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.5906 0.2267 7);
@@ -118,6 +118,10 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  body[data-scroll-locked] {
+    @apply mr-0! ml-0! overflow-visible!;
   }
 }
 

@@ -8,6 +8,7 @@ type Props = {
   type?: "button" | "submit";
   submittingText?: string;
   isSubmitting?: boolean;
+  children?: React.ReactNode;
 };
 
 export default function SubmitButton({
@@ -16,9 +17,11 @@ export default function SubmitButton({
   type = "submit",
   submittingText,
   isSubmitting,
+  children,
 }: Props) {
   return (
     <Button type={type} className={className} disabled={isSubmitting}>
+      {children}
       {isSubmitting ? submittingText : text}
     </Button>
   );

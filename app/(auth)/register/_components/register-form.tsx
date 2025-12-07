@@ -46,12 +46,12 @@ export default function RegisterForm() {
         },
         onSuccess: () => {
           setIsLoading(false);
-          toast.success("You've successfully created an account");
+          toast("You've successfully created an account");
           router.push("/");
         },
         onError: (ctx) => {
           setIsLoading(false);
-          toast.error(ctx.error.message || "Error while registering");
+          toast(ctx.error.message || "Error while registering");
           console.log(ctx);
         },
       }
@@ -73,7 +73,7 @@ export default function RegisterForm() {
                 {...field}
                 id="register-form-full-name"
                 aria-invalid={fieldState.invalid}
-                placeholder="e.g Elena Messy"
+                placeholder="e.g Alice Mess"
                 autoComplete="off"
                 className="border-foreground border-2"
               />

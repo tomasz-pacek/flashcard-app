@@ -43,12 +43,12 @@ export default function LoginForm() {
         },
         onSuccess: () => {
           setIsLoading(false);
-          toast.success("You've successfully logged in!");
+          toast("You've successfully logged in!");
           router.push("/");
         },
         onError: (ctx) => {
           setIsLoading(false);
-          toast.error(ctx.error.message || "Error while logging in");
+          toast(ctx.error.message || "Error while logging in");
         },
       }
     );

@@ -30,10 +30,10 @@ export default function CreateNewCategoryForm() {
     const response = await createCategory(values.category, user?.id as string);
 
     if (response.status) {
-      toast.success(response.message);
+      toast(response.message);
       form.reset();
     } else {
-      toast.error(response.message);
+      toast(response.message);
     }
   };
 

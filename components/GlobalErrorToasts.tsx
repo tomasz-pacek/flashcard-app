@@ -10,9 +10,8 @@ function ErrorToastContent() {
   useEffect(() => {
     const error = searchParams.get("error");
 
-    if (error === "not_authenticated") toast.error("You must be logged in.");
-    if (error === "already_authenticated")
-      toast.error("You are already logged in.");
+    if (error === "not_authenticated") toast("You must be logged in.");
+    if (error === "already_authenticated") toast("You are already logged in.");
   }, [searchParams]);
 
   return null;
@@ -30,7 +29,7 @@ export default function GlobalErrorToasts() {
         toastOptions={{
           unstyled: true,
           className:
-            "border border-foreground shadow-right-bottom rounded-full flex items-center justify-center gap-x-2",
+            "border-2 border-foreground shadow-right-bottom rounded-full flex flex-row-reverse items-center justify-center gap-x-2 whitespace-nowrap px-6 py-3 bg-white font-medium text-base",
         }}
       />
     </>

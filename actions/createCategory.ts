@@ -21,7 +21,7 @@ export const createCategory = async (category: string, userId: string) => {
       revalidatePath("/cards");
       return {
         status: true,
-        message: "You have successfully created new flashcard category.",
+        message: "Card category created.",
       };
     } else {
       return {

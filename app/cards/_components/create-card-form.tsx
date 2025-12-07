@@ -15,12 +15,18 @@ import { CirclePlus } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
 import CategorySelect from "./category-select";
+import { useState } from "react";
+import { createFlashcard } from "@/actions/createFlashcard";
+import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 type Props = {
   flashcardCategories: Category[];
 };
 
 export default function CreateCardForm({ flashcardCategories }: Props) {
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const { user } = useAuth();
   const form = useForm<z.infer<typeof createCardFormSchema>>({
     resolver: zodResolver(createCardFormSchema),
     defaultValues: {
@@ -30,7 +36,21 @@ export default function CreateCardForm({ flashcardCategories }: Props) {
   });
 
   const onSubmit = async (values: z.infer<typeof createCardFormSchema>) => {
-    console.log("Create card form values", values);
+    if (!user) return;
+    const response = await createFlashcard(
+      values.question,
+      values.answer,
+      selectedCategory,
+      user.id
+    );
+
+    if (response.status) {
+      toast(response.message);
+      form.reset();
+      setSelectedCategory("");
+    } else {
+      toast(response.message);
+    }
   };
 
   return (
@@ -74,7 +94,11 @@ export default function CreateCardForm({ flashcardCategories }: Props) {
             </Field>
           )}
         />
-        <CategorySelect flashcardCategories={flashcardCategories} />
+        <CategorySelect
+          flashcardCategories={flashcardCategories}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
       </FieldGroup>
       <SubmitButton
         text="Create Card"

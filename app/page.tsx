@@ -30,7 +30,9 @@ export default function Home() {
           </Button>
         </div>
       </div>
-      <div className="border-2 border-foreground bg-white">hej</div>
+      <div className="border-2 border-foreground bg-white rounded-xl shadow-right-bottom">
+        hej
+      </div>
     </div>
   );
 }

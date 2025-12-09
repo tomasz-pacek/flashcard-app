@@ -19,9 +19,8 @@ export const editFlashcard = async (
       return { status: false, message: "Forbidden" };
 
     const { question, answer, categoryId } = values;
-    if (!categoryId) {
+    if (!categoryId)
       return { status: false, message: "You have to choose category" };
-    }
 
     await prisma.flashcard.update({
       where: {

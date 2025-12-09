@@ -18,7 +18,7 @@ export default function FlashcardSettings({ flashcardId }: Props) {
     useDialogsContext();
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger className="cursor-pointer">
         <EllipsisVertical />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="border border-foreground p-0 divide-y divide-foreground">

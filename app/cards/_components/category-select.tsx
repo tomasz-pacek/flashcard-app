@@ -22,12 +22,16 @@ export default function CategorySelect({
 }: Props) {
   return (
     <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-      <SelectTrigger className="w-full">
+      <SelectTrigger className="w-full text-foreground font-medium border-2 border-foreground ">
         <SelectValue placeholder="Select category" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="border-2 border-foreground shadow-right-bottom p-0 divide-y">
         {flashcardCategories.map((category) => (
-          <SelectItem key={category.id} value={category.id}>
+          <SelectItem
+            key={category.id}
+            value={category.id}
+            className="cursor-pointer hover:bg-background text-foreground font-medium bg-white"
+          >
             {category.category}
           </SelectItem>
         ))}

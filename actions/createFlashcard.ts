@@ -19,6 +19,9 @@ export const createFlashcard = async (
       },
     });
 
+    if (!categoryId)
+      return { status: false, message: "You have to choose category" };
+
     if (!existingFlashcard) {
       await prisma.flashcard.create({
         data: {

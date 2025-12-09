@@ -1,20 +1,13 @@
+import CategoriesCheckbox from "@/components/categories-checkbox";
 import { Button } from "@/components/ui/button";
-import { Select, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
   return (
     <div className="w-full grid grid-cols-[2fr_1fr] max-lg:grid-cols-1 gap-6 ">
       <div className="w-full border-2 border-foreground shadow-right-bottom rounded-2xl bg-white">
         <div className="w-full rounded-t-2xl border-b-2 border-foreground p-6">
-          <Select>
-            <SelectTrigger className="rounded-full border-foreground border-2">
-              <SelectValue
-                placeholder="All categories"
-                className="placeholder:text-foreground"
-              />
-            </SelectTrigger>
-          </Select>
+          <CategoriesCheckbox />
         </div>
         <div className="w-full flex flex-col items-center justify-center my-6 gap-y-6">
           <p className="text-2xl font-semibold">No cards to study</p>

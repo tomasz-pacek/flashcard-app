@@ -5,6 +5,8 @@ export type Flashcard = {
   userId: string;
   question: string;
   answer: string;
+  isMastered: boolean;
+  progress: number;
   categoryId: string;
-  category: Category[];
+  category: Category;
 };

@@ -9,6 +9,7 @@ type Props = {
   submittingText?: string;
   isSubmitting?: boolean;
   children?: React.ReactNode;
+  onClick?: () => void;
 };
 
 export default function SubmitButton({
@@ -18,9 +19,15 @@ export default function SubmitButton({
   submittingText,
   isSubmitting,
   children,
+  onClick,
 }: Props) {
   return (
-    <Button type={type} className={className} disabled={isSubmitting}>
+    <Button
+      type={type}
+      className={className}
+      disabled={isSubmitting}
+      onClick={onClick}
+    >
       {children}
       {isSubmitting ? submittingText : text}
     </Button>

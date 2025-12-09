@@ -6,6 +6,7 @@ import CreateNewCategoryForm from "./_components/create-new-category-form";
 import { prisma } from "@/lib/prisma";
 import FlashcardsGrid from "./_components/flashcards-grid";
 import { FlashcardCategoriesProvider } from "@/contexts/flashcards-categories-provider";
+import FilterWrapper from "./_components/filters/filter-wrapper";
 
 export default async function CardsPage() {
   const user = await getCurrentUser();
@@ -34,6 +35,7 @@ export default async function CardsPage() {
           </CardContent>
         </Card>
       </div>
+      <FilterWrapper />
       <FlashcardsGrid />
     </FlashcardCategoriesProvider>
   );

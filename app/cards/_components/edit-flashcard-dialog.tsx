@@ -6,11 +6,9 @@ import {
   DialogHeader,
   DialogOverlay,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { useDialogsContext } from "@/contexts/DialogsProvider";
 import EditFlashcardForm from "./edit-flashcard-form";
-import { useFlashcardCategories } from "@/contexts/flashcards-categories-provider";
 
 export default function EditFlashcardDialog() {
   const { isEditDialogOpen, setIsEditDialogOpen } = useDialogsContext();

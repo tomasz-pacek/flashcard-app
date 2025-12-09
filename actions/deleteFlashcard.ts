@@ -1,6 +1,7 @@
 "use server";
 import { getCurrentUser } from "@/lib/auth-utils";
 import { prisma } from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 
 export const deleteFlashcard = async (flashcardId: string, userId: string) => {
   try {
@@ -14,6 +15,7 @@ export const deleteFlashcard = async (flashcardId: string, userId: string) => {
           id: flashcardId,
         },
       });
+      revalidatePath("/cards");
       return {
         status: true,
         message: "Card deleted.",

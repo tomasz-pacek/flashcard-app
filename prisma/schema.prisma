@@ -84,8 +84,8 @@ model Flashcard {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   question String 
   answer String
-  isMastered Boolean
-  progress Int 
+  isMastered Boolean @default(false)
+  progress Int @default(0)
   categoryId String
   category Category @relation(fields: [categoryId], references: [id])
 }

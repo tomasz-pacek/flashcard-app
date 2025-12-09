@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/navbar";
 import GlobalErrorToasts from "@/components/GlobalErrorToasts";
+import { DialogsContextProvider } from "@/contexts/DialogsProvider";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -21,12 +22,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${poppins.className} antialiased text-foreground container mx-auto px-4`}
-      >
-        <Navbar />
-        {children}
-        <GlobalErrorToasts />
+      <body className={`${poppins.className} antialiased text-foreground px-4`}>
+        <DialogsContextProvider>
+          <main className="container mx-auto">
+            <Navbar />
+            {children}
+          </main>
+          <GlobalErrorToasts />
+        </DialogsContextProvider>
       </body>
     </html>
   );

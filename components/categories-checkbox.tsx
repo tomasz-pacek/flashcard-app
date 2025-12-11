@@ -6,13 +6,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useFlashcardCategoriesWithCount } from "@/contexts/flashcards-categories-with-count-provider";
 import { ChevronDown } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { CategoryWithCount } from "@/types/category";
 
-export default function CategoriesCheckbox() {
-  const categories = useFlashcardCategoriesWithCount();
+type Props = {
+  categories: CategoryWithCount[];
+};
+
+export default function CategoriesCheckbox({ categories }: Props) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -34,7 +37,7 @@ export default function CategoriesCheckbox() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="bg-white border-2 border-foreground rounded-full py-2 px-4 flex gap-x-2 font-medium text-base">
+      <DropdownMenuTrigger className="bg-white border-2 border-foreground rounded-full py-2 px-4 flex gap-x-2 font-medium text-base cursor-pointer">
         All Categories <ChevronDown />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="border-2 border-foreground divide-y divide-foreground p-0">

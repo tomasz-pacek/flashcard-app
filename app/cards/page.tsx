@@ -9,6 +9,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import CreateNewCategoryForm from "./_components/create-new-category-form";
 import CreateCardForm from "./_components/create-card-form";
 import FlashcardsSkeleton from "@/components/skeletons/flashcards-skeleton";
+import DeleteFlashcardDialog from "./_components/delete-flashcard-dialog";
+import EditFlashcardDialog from "./_components/edit-flashcard-dialog";
 
 type Props = {
   searchParams: Promise<{
@@ -44,6 +46,8 @@ export default async function CardsPage({ searchParams }: Props) {
       <Suspense fallback={<FlashcardsSkeleton />}>
         <FlashcardsLoader searchParamsPromise={searchParams} userId={user.id} />
       </Suspense>
+      <DeleteFlashcardDialog />
+      <EditFlashcardDialog />
     </FlashcardCategoriesProvider>
   );
 }

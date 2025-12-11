@@ -13,13 +13,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
 import CategorySelect from "./category-select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SubmitButton from "@/components/submit-button";
 import { editFlashcard } from "@/actions/editFlashcard";
 import { useDialogsContext } from "@/contexts/DialogsProvider";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { getSpecificFlashcard } from "@/actions/getSpecificFlashcard";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function EditFlashcardForm() {
   const router = useRouter();
@@ -28,6 +30,7 @@ export default function EditFlashcardForm() {
 
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
 
   const { user } = useAuth();
 
@@ -61,6 +64,34 @@ export default function EditFlashcardForm() {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    async function fetchFlashcard() {
+      if (!user || !selectedFlashcardId) return;
+      setIsFetching(true);
+      const response = await getSpecificFlashcard(selectedFlashcardId, user.id);
+
+      if (response.status) {
+        form.reset({
+          question: response.flashcard?.question,
+          answer: response.flashcard?.answer,
+        });
+        setSelectedCategoryId(response.flashcard?.categoryId || "");
+        setIsFetching(false);
+      } else {
+        toast(response.message);
+      }
+    }
+    fetchFlashcard();
+  }, [form, selectedFlashcardId, user]);
+
+  if (isFetching) {
+    return (
+      <div className="w-full">
+        <Spinner className="size-8" />
+      </div>
+    );
+  }
 
   return (
     <form id="edit-flashcard-form" onSubmit={form.handleSubmit(onSubmit)}>

@@ -1,13 +1,10 @@
 "use client";
 
-import DeleteFlashcardDialog from "./delete-flashcard-dialog";
-import EditFlashcardDialog from "./edit-flashcard-dialog";
 import FlashcardSettings from "./flashcard-settings";
 import { Flashcard } from "@/types/flashcard";
-import { useAuth } from "@/hooks/useAuth";
 import { useRouter, useSearchParams } from "next/navigation";
 import SubmitButton from "@/components/submit-button";
-import { useEffect, useState, useTransition } from "react";
+import { useTransition } from "react";
 
 type Props = {
   flashcards: Flashcard[];
@@ -90,9 +87,6 @@ export default function FlashcardsGridClient({
           />
         </div>
       )}
-
-      <DeleteFlashcardDialog />
-      <EditFlashcardDialog />
     </div>
   );
 }

@@ -19,8 +19,10 @@ import { editFlashcard } from "@/actions/editFlashcard";
 import { useDialogsContext } from "@/contexts/DialogsProvider";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function EditFlashcardForm() {
+  const router = useRouter();
   const categories = useFlashcardCategories();
   const { selectedFlashcardId, setIsEditDialogOpen } = useDialogsContext();
 
@@ -53,6 +55,7 @@ export default function EditFlashcardForm() {
       form.reset();
       setIsLoading(false);
       setIsEditDialogOpen(false);
+      router.refresh();
     } else {
       toast(response.message);
       setIsLoading(false);

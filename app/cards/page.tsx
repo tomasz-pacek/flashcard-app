@@ -1,26 +1,31 @@
-import { Card, CardContent } from "@/components/ui/card";
-import CreateCardForm from "./_components/create-card-form";
-import { getCurrentUser } from "@/lib/auth-utils";
-import { redirect } from "next/navigation";
-import CreateNewCategoryForm from "./_components/create-new-category-form";
-import { prisma } from "@/lib/prisma";
-import FlashcardsGrid from "./_components/flashcards-grid";
 import { FlashcardCategoriesProvider } from "@/contexts/flashcards-categories-provider";
+import { getCurrentUser } from "@/lib/auth-utils";
+import { prisma } from "@/lib/prisma";
+import { redirect } from "next/navigation";
 import FilterWrapper from "./_components/filters/filter-wrapper";
+import { Suspense } from "react";
+import FlashcardsLoader from "./_components/flashcards-loader";
+import { Card, CardContent } from "@/components/ui/card";
+import CreateNewCategoryForm from "./_components/create-new-category-form";
+import CreateCardForm from "./_components/create-card-form";
+import FlashcardsSkeleton from "@/components/skeletons/flashcards-skeleton";
 
-export default async function CardsPage() {
+type Props = {
+  searchParams: Promise<{
+    [key: string]: string | string[] | undefined;
+  }>;
+};
+
+export default async function CardsPage({ searchParams }: Props) {
   const user = await getCurrentUser();
   if (!user) redirect("/?error=not_authenticated");
 
   const flashcardCategories = await prisma.category.findMany({
-    where: {
-      userId: user.id,
-    },
+    where: { userId: user.id },
   });
 
   return (
     <FlashcardCategoriesProvider categories={flashcardCategories}>
-      {/* GRID */}
       <div className="w-full grid grid-cols-[1fr_2fr] max-lg:grid-cols-1 gap-6">
         {/* CATEGORY CREATOR */}
         <Card className="shadow-right-bottom border-2 border-foreground">
@@ -36,7 +41,9 @@ export default async function CardsPage() {
         </Card>
       </div>
       <FilterWrapper />
-      <FlashcardsGrid />
+      <Suspense fallback={<FlashcardsSkeleton />}>
+        <FlashcardsLoader searchParamsPromise={searchParams} userId={user.id} />
+      </Suspense>
     </FlashcardCategoriesProvider>
   );
 }

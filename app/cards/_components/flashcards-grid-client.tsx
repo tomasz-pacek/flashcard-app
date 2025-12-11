@@ -1,43 +1,47 @@
 "use client";
 
-import { useState, useTransition } from "react";
 import DeleteFlashcardDialog from "./delete-flashcard-dialog";
 import EditFlashcardDialog from "./edit-flashcard-dialog";
 import FlashcardSettings from "./flashcard-settings";
 import { Flashcard } from "@/types/flashcard";
-import { loadMoreFlashcards } from "@/actions/loadMoreFlashcards";
-import SubmitButton from "@/components/submit-button";
 import { useAuth } from "@/hooks/useAuth";
+import { useRouter, useSearchParams } from "next/navigation";
+import SubmitButton from "@/components/submit-button";
+import { useEffect, useState, useTransition } from "react";
 
 type Props = {
-  initialFlashcards: Flashcard[];
+  flashcards: Flashcard[];
+  hasMore: boolean;
+  currentPage: number;
 };
 
-export default function FlashcardsGridClient({ initialFlashcards }: Props) {
-  const [flashcards, setFlashcards] = useState(initialFlashcards);
+export default function FlashcardsGridClient({
+  flashcards,
+  hasMore,
+  currentPage,
+}: Props) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const pageSize = 12;
   const [isPending, startTransition] = useTransition();
-  const [hasMore, setHasMore] = useState<boolean>(true);
 
-  const { user } = useAuth();
-  if (!user) return null;
+  const visibleCards = flashcards.slice(0, pageSize * currentPage);
 
-  const handleLoadMoreFlashcards = () => {
-    startTransition(async () => {
-      const { flashcards: more, hasMore: moreAvailable } =
-        await loadMoreFlashcards(flashcards.length, user.id);
+  const handleLoadMore = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    const page = params.get("page") ? parseInt(params.get("page")!) : 1;
 
-      if (!moreAvailable) {
-        setHasMore(false);
-      }
+    params.set("page", (page + 1).toString());
 
-      setFlashcards((prev) => [...prev, ...more]);
+    startTransition(() => {
+      router.push(`?${params.toString()}`, { scroll: false });
     });
   };
 
   return (
     <div className="w-full grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 gap-6 mb-12">
-      {flashcards.length > 0 ? (
-        flashcards.map((flashcard) => (
+      {visibleCards.length > 0 ? (
+        visibleCards.map((flashcard) => (
           <div
             key={flashcard.id}
             className="w-full min-h-[260px] border-2 border-foreground rounded-2xl shadow-right-bottom bg-white flex flex-col"
@@ -74,15 +78,15 @@ export default function FlashcardsGridClient({ initialFlashcards }: Props) {
           </p>
         </div>
       )}
+
       {hasMore && (
-        <div className="w-full col-span-full flex items-center justify-center">
+        <div className="w-full col-span-full flex items-center justify-center mt-4">
           <SubmitButton
-            text="Load More"
-            className="cursor-pointer mt-4 rounded-full bg-white border-2 border-foreground shadow-right-bottom transition-all duration-200 hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none hover:bg-white"
-            isSubmitting={isPending}
+            text="Load more"
+            className="cursor-pointer  rounded-full border-foreground border-2 shadow-right-bottom transition-all duration-200 hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
+            onClick={handleLoadMore}
             submittingText="Loading..."
-            type="button"
-            onClick={handleLoadMoreFlashcards}
+            isSubmitting={isPending}
           />
         </div>
       )}

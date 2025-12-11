@@ -19,6 +19,7 @@ import { useState } from "react";
 import { createFlashcard } from "@/actions/createFlashcard";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 type Props = {
   flashcardCategories: Category[];
@@ -26,6 +27,7 @@ type Props = {
 
 export default function CreateCardForm({ flashcardCategories }: Props) {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const router = useRouter();
   const { user } = useAuth();
   const form = useForm<z.infer<typeof createCardFormSchema>>({
     resolver: zodResolver(createCardFormSchema),
@@ -51,6 +53,7 @@ export default function CreateCardForm({ flashcardCategories }: Props) {
     } else {
       toast(response.message);
     }
+    router.refresh();
   };
 
   return (

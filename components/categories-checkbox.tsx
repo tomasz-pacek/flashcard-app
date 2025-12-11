@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,17 +8,29 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { useFlashcardCategoriesWithCount } from "@/contexts/flashcards-categories-with-count-provider";
 import { ChevronDown } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function CategoriesCheckbox() {
   const categories = useFlashcardCategoriesWithCount();
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  console.log(selectedCategories);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(
+    searchParams.getAll("category")
+  );
 
   const toggleCategory = (id: string) => {
     setSelectedCategories((prev) =>
       prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id]
     );
   };
+
+  useEffect(() => {
+    const params = new URLSearchParams();
+    selectedCategories.forEach((c) => params.append("category", c));
+    router.push(`?${params.toString()}`, { scroll: false });
+  }, [selectedCategories, router]);
 
   return (
     <DropdownMenu>

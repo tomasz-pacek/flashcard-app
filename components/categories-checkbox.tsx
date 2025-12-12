@@ -30,7 +30,8 @@ export default function CategoriesCheckbox({ categories }: Props) {
   };
 
   useEffect(() => {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("category");
     selectedCategories.forEach((c) => params.append("category", c));
     router.push(`?${params.toString()}`, { scroll: false });
   }, [selectedCategories, router]);
@@ -61,7 +62,7 @@ export default function CategoriesCheckbox({ categories }: Props) {
             </div>
           ))
         ) : (
-          <div className="p-2 text-gray-500">no categories to show</div>
+          <div className="p-2 text-gray-500">No categories</div>
         )}
       </DropdownMenuContent>
     </DropdownMenu>

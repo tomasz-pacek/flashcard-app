@@ -26,15 +26,19 @@ export default function CategorySelect({
         <SelectValue placeholder="Select category" />
       </SelectTrigger>
       <SelectContent className="border-2 border-foreground shadow-right-bottom p-0 divide-y">
-        {flashcardCategories.map((category) => (
-          <SelectItem
-            key={category.id}
-            value={category.id}
-            className="cursor-pointer hover:bg-background text-foreground font-medium bg-white"
-          >
-            {category.category}
-          </SelectItem>
-        ))}
+        {flashcardCategories.length > 0 ? (
+          flashcardCategories.map((category) => (
+            <SelectItem
+              key={category.id}
+              value={category.id}
+              className="cursor-pointer hover:bg-background text-foreground font-medium bg-white"
+            >
+              {category.category}
+            </SelectItem>
+          ))
+        ) : (
+          <p className="text-gray-500 p-2">No categories</p>
+        )}
       </SelectContent>
     </Select>
   );

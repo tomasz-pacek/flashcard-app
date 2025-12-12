@@ -85,7 +85,7 @@ model Flashcard {
   question String 
   answer String
   isMastered Boolean @default(false)
-  progress Int @default(0)
+  progress Int @default(0) 
   categoryId String
   category Category @relation(fields: [categoryId], references: [id])
 }

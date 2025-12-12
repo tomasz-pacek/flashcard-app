@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 type Props = {
   text: string;
   className: string;
+  textClassName?: string;
   type?: "button" | "submit";
   submittingText?: string;
   isSubmitting?: boolean;
@@ -15,6 +16,7 @@ type Props = {
 export default function SubmitButton({
   text,
   className,
+  textClassName,
   type = "submit",
   submittingText,
   isSubmitting,
@@ -29,7 +31,10 @@ export default function SubmitButton({
       onClick={onClick}
     >
       {children}
-      {isSubmitting ? submittingText : text}
+
+      <span className={textClassName}>
+        {isSubmitting ? submittingText : text}
+      </span>
     </Button>
   );
 }

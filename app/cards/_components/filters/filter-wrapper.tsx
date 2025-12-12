@@ -1,6 +1,7 @@
 import { getCategoriesWithCount } from "@/actions/getCategoriesWithCount";
 import CategoriesCheckbox from "@/components/categories-checkbox";
 import HideMastered from "@/components/hide-mastered";
+import SubmitButton from "@/components/submit-button";
 import { getCurrentUser } from "@/lib/auth-utils";
 
 export default async function FilterWrapper() {
@@ -9,10 +10,12 @@ export default async function FilterWrapper() {
   const categories = await getCategoriesWithCount(currentUser.id);
   return (
     <div className="w-full flex items-center justify-between mt-8 mb-6">
-      <span className="flex items-center justify-center gap-x-4">
+      <div className="flex items-center justify-center gap-x-4">
         <CategoriesCheckbox categories={categories} />
         <HideMastered />
-      </span>
+      </div>
+      {/* TODO: HERE THIS BUTTON TO FLUSH THE PROGRESS
+      <SubmitButton text="Reset many" /> */}
     </div>
   );
 }

@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar/navbar";
 import GlobalErrorToasts from "@/components/GlobalErrorToasts";
 import { DialogsContextProvider } from "@/contexts/DialogsProvider";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -38,6 +39,7 @@ export default function RootLayout({
           </main>
           <GlobalErrorToasts />
         </DialogsContextProvider>
+        <SpeedInsights />
       </body>
     </html>
   );

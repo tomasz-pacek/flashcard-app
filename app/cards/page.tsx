@@ -5,13 +5,14 @@ import { redirect } from "next/navigation";
 import FilterWrapper from "./_components/filters/filter-wrapper";
 import { Suspense } from "react";
 import FlashcardsLoader from "./_components/flashcards-loader";
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 import CreateNewCategoryForm from "./_components/create-new-category-form";
 import CreateCardForm from "./_components/create-card-form";
 import FlashcardsSkeleton from "@/components/skeletons/flashcards-skeleton";
 import DeleteFlashcardDialog from "./_components/delete-flashcard-dialog";
 import EditFlashcardDialog from "./_components/edit-flashcard-dialog";
 import { Metadata } from "next";
+import MotionCard from "./_components/motion-card";
 
 export const metadata: Metadata = {
   title: "All Cards",
@@ -40,22 +41,37 @@ export default async function CardsPage({ searchParams }: Props) {
     <FlashcardCategoriesProvider categories={flashcardCategories}>
       <div className="w-full grid grid-cols-[1fr_2fr] max-lg:grid-cols-1 gap-6">
         {/* CATEGORY CREATOR */}
-        <Card className="shadow-right-bottom border-2 border-foreground">
+        <MotionCard
+          className="shadow-right-bottom border-2 border-foreground h-full"
+          motionProps={{
+            initial: { opacity: 0, x: -20 },
+            animate: { opacity: 1, x: 0 },
+            transition: { duration: 0.3 },
+          }}
+        >
           <CardContent>
             <CreateNewCategoryForm />
           </CardContent>
-        </Card>
+        </MotionCard>
         {/* FLASHCARD CREATOR */}
-        <Card className="shadow-right-bottom border-2 border-foreground">
+        <MotionCard
+          className="shadow-right-bottom border-2 border-foreground"
+          motionProps={{
+            initial: { opacity: 0, x: 20 },
+            animate: { opacity: 1, x: 0 },
+            transition: { duration: 0.4 },
+          }}
+        >
           <CardContent>
             <CreateCardForm flashcardCategories={flashcardCategories} />
           </CardContent>
-        </Card>
+        </MotionCard>
       </div>
       <FilterWrapper />
       <Suspense fallback={<FlashcardsSkeleton />}>
         <FlashcardsLoader searchParamsPromise={searchParams} userId={user.id} />
       </Suspense>
+      {/* DIALOGs */}
       <DeleteFlashcardDialog />
       <EditFlashcardDialog />
     </FlashcardCategoriesProvider>

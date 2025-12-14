@@ -13,7 +13,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Flaschards App",
   icons: {
-    icon: "/favicon-32x32.png",
+    icon: "/favicon.png",
   },
   keywords: ["flashcards", "studying", "learning"],
   alternates: {

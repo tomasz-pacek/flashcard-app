@@ -1,7 +1,6 @@
 import { getCategoriesWithCount } from "@/actions/getCategoriesWithCount";
 import CategoriesCheckbox from "@/components/categories-checkbox";
 import HideMastered from "@/components/hide-mastered";
-import SubmitButton from "@/components/submit-button";
 import { getCurrentUser } from "@/lib/auth-utils";
 
 export default async function FilterWrapper() {
@@ -14,8 +13,6 @@ export default async function FilterWrapper() {
         <CategoriesCheckbox categories={categories} />
         <HideMastered />
       </div>
-      {/* TODO: HERE THIS BUTTON TO FLUSH THE PROGRESS
-      <SubmitButton text="Reset many" /> */}
     </div>
   );
 }

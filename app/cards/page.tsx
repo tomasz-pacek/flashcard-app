@@ -11,6 +11,16 @@ import CreateCardForm from "./_components/create-card-form";
 import FlashcardsSkeleton from "@/components/skeletons/flashcards-skeleton";
 import DeleteFlashcardDialog from "./_components/delete-flashcard-dialog";
 import EditFlashcardDialog from "./_components/edit-flashcard-dialog";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "All Cards",
+  description:
+    "Create and manage your flashcards. Build custom card sets, edit content, and organize your learning material.",
+  alternates: {
+    canonical: "https://localhost:3000/cards",
+  },
+};
 
 type Props = {
   searchParams: Promise<{

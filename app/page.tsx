@@ -7,6 +7,16 @@ import { prisma } from "@/lib/prisma";
 import StudyingWrapper from "./_components/studying/studying-wrapper";
 import AllMasteredMessage from "./_components/all-mastered-message";
 import NoUserMessage from "./_components/no-user-message";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Study Mode",
+  description:
+    "Study with flashcards using an efficient study mode. Review cards, reinforce knowledge, and learn smarter.",
+  alternates: {
+    canonical: "https://localhost:3000/",
+  },
+};
 
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

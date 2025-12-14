@@ -2,6 +2,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import LoginForm from "./_components/login-form";
 import { getCurrentUser } from "@/lib/auth-utils";
 import { redirect } from "next/navigation";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Login - Flashcards",
+  description:
+    "Log in to your flashcard account to continue learning, review your cards, and track your study progress.",
+  alternates: {
+    canonical: "https://localhost:3000/login",
+  },
+};
 
 export default async function LoginPage() {
   const user = await getCurrentUser();

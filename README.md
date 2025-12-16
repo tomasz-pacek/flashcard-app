@@ -1,4 +1,4 @@
-<h1>📃 Flashcard App</h1>
+<h1>🗂️ Flashcard App</h1>
 
 <h2>About the Project</h2>
 <p>A interactive flashcard app from <a href="https://www.frontendmentor.io/challenges/recipe-finder-website--Ui-TZTPxN" target="_blank">Frontend Mentor</a> written in Next.js TailwindCSS Better-Auth ShadCN Prisma ORM and PostgreSQL. 
@@ -8,8 +8,8 @@ I built this to strengthen my full-stack development skills and to practice buil
 
 <p>For data management, I used Prisma ORM with a clean and type-safe PostgreSQL database hosted on Neon. CRUD operations are handled using Next.js Server Actions to ensure secure and fast server-side logic. SEO was improved using the built-in metadata API provided by Next.js.</p>
 
-![Site preview](recipe-site-preview.png)
+![Site preview](flashcard-app-site-preview.png)
 
 <h2>Live Preview</h2>
-<a href="https://flashcard-app-gilt-five.vercel.app" target="_blank">URL Shortener</a>
+<a href="https://flashcard-app-gilt-five.vercel.app" target="_blank">Flashcard App</a>
 

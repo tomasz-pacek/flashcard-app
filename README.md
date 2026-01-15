@@ -8,7 +8,7 @@ I built this to strengthen my full-stack development skills and to practice buil
 
 <p>For data management, I used Prisma ORM with a clean and type-safe PostgreSQL database hosted on Neon. CRUD operations are handled using Next.js Server Actions to ensure secure and fast server-side logic. SEO was improved using the built-in metadata API provided by Next.js.</p>
 
-![Site preview](flashcard-app-site-preview.png)
+![Site preview](https://raw.githubusercontent.com/tomasz-pacek/flashcard-app/main/flashcard-app-site-preview.png)
 
 <h2>Live Preview</h2>
 <a href="https://flashcard-app-gilt-five.vercel.app" target="_blank">Flashcard App</a>
